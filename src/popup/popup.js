@@ -1,7 +1,4 @@
 import React from "react";
-import ApolloClient from "apollo-boost";
-import gql from "graphql-tag";
-import { ACCESS_TOKEN } from "../config";
 import {
   Container,
   Header,
@@ -13,52 +10,9 @@ import refresh from "../assets/refresh.svg";
 import github from "../assets/github-blue.svg";
 import githubIcon from "../assets/github-white.svg";
 import { ImageButton } from "../components/presentational/button";
-
-const client = new ApolloClient({
-  uri: "https://api.github.com/graphql",
-  request: async operation => {
-    operation.setContext({
-      headers: {
-        Authorization: `token ${ACCESS_TOKEN}`
-      }
-    });
-  }
-});
-
-client
-  .query({
-    query: gql`
-      {
-        search(
-          first: 10
-          query: "label:help-wanted label:good-first-issue state:open language:JavaScript"
-          type: ISSUE
-        ) {
-          edges {
-            node {
-              ... on Issue {
-                title
-                bodyText
-                updatedAt
-                labels(first: 10) {
-                  edges {
-                    node {
-                      name
-                    }
-                  }
-                }
-                url
-                repository {
-                  nameWithOwner
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-  })
-  .then(result => console.log(result));
+import { Query } from "react-apollo";
+import { ISSUES_QUERY } from "../constants";
+import Cards from "../components/container/cards";
 
 export default class PopUp extends React.Component {
   render() {
@@ -74,7 +28,34 @@ export default class PopUp extends React.Component {
           />
         </Header>
         <Body>
-          <Card>
+          <Query query={ISSUES_QUERY}>
+            {({ data }) => {
+              if (data.search === undefined) return null;
+              return (
+                <div>
+                  <Cards data={data.search.edges}/>
+                  {/* {data.search.edges.map(e => (
+                    <Card>
+                      <div className="header">
+                        <img className="icon" src={githubIcon} />
+                        <p className="repo">nodejs/node</p>
+                        <p className="date">24-12-2018</p>
+                      </div>
+                      <p className="title">
+                        {e.node.title}
+                      </p>
+                      <p className="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                      </p>
+                    </Card>
+                  ))} */}
+                </div>
+              );
+            }}
+          </Query>
+          {/* <Card>
             <div className="header">
               <img className="icon" src={githubIcon} />
               <p className="repo">nodejs/node</p>
@@ -87,7 +68,7 @@ export default class PopUp extends React.Component {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-          </Card>
+          </Card> */}
         </Body>
       </Container>
     );
