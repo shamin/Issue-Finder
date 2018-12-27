@@ -1,0 +1,19 @@
+{
+  "name": "issue-finder",
+  "version": "1.0.0",
+  "description": "Chrome extension to view github issues",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaminmeerankutty/Issue-Finder.git"
+  },
+  "author": "Shamin Meerankutty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaminmeerankutty/Issue-Finder/issues"
+  },
+  "homepage": "https://github.com/shaminmeerankutty/Issue-Finder#readme"
+}
