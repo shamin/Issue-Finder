@@ -62,3 +62,4 @@ typings/
 extension/options.js
 extension/popup.js
 src/config.js
+.DS_Store
