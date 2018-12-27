@@ -5,9 +5,9 @@ import githubIcon from "../../assets/github-white.svg";
 const CardStyles = styled.div`
   background: #4d5be7;
   color: #ffffff;
-  border-radius: 10px;
+  border-radius: 20px;
   margin: 15px 10px;
-  padding: 20px;
+  padding: 25px 20px;
   a {
     text-decoration: none;
     color: #ffffff;
@@ -54,10 +54,14 @@ const Card = props => {
     <CardStyles>
       <div className="header">
         <img className="icon" src={githubIcon} />
-        <a className="repo" href={issue.repository.url} target="_blank">{issue.repository.nameWithOwner}</a>
+        <a className="repo" href={issue.repository.url} target="_blank">
+          {issue.repository.nameWithOwner}
+        </a>
         {/* <p className="date">24-12-2018</p> */}
       </div>
-      <a className="title"  href={issue.url} target="_blank">{issue.title}</a>
+      <a className="title" href={issue.url} target="_blank">
+        {issue.title}
+      </a>
       <p className="description">{issue.bodyText}</p>
     </CardStyles>
   );
