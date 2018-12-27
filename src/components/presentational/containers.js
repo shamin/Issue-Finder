@@ -3,9 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   width: 350px;
+  max-height: 500px;
   height: 500px;
   background: #fcfcfc;
   font-family: "Roboto", sans-serif;
+  overflow: hidden;
   p {
     padding: 0;
     margin: 0;

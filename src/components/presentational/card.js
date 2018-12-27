@@ -14,6 +14,7 @@ const Card = styled.div`
     }
     .repo {
       flex: 1;
+      font-size: 16px;
       padding-left: 10px;
       font-weight: 500;
     }

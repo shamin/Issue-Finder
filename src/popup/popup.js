@@ -68,14 +68,17 @@ export default class PopUp extends React.Component {
           <img className="logo" src={logo} />
           <h1 className="name">Issue Finder</h1>
           <ImageButton src={refresh} />
-          <ImageButton src={github} />
+          <ImageButton
+            src={github}
+            href="https://github.com/shaminmeerankutty/Issue-Finder"
+          />
         </Header>
         <Body>
           <Card>
             <div className="header">
               <img className="icon" src={githubIcon} />
               <p className="repo">nodejs/node</p>
-              <p className="date">24/12/2018</p>
+              <p className="date">24-12-2018</p>
             </div>
             <p className="title">
               Add `input` option to async child_process methods

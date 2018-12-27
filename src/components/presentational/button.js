@@ -19,8 +19,8 @@ const Button = styled.a`
   }
 `
 
-export const ImageButton = ({src})=>(
-  <Button>
-    <img className="icon" src={src} />
+export const ImageButton = (props)=>(
+  <Button {...props} target="_blank">
+    <img className="icon" src={props.src} />
   </Button>
 )
