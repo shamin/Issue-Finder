@@ -1,32 +1,36 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   entry: {
-    'options': './src/options/options.js',
-    'popup': './src/popup/index.js',
+    options: "./src/options/options.js",
+    popup: "./src/popup/index.js"
   },
   output: {
-    path: path.resolve(__dirname, 'extension'),
-    filename: '[name].js'
+    path: path.resolve(__dirname, "extension"),
+    filename: "[name].js"
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
+        loader: "babel-loader"
       },
       {
-        type: 'javascript/auto',
+        type: "javascript/auto",
         test: /\.mjs$/,
         use: []
+      },
+      {
+        test: /\.svg$/,
+        loader: "svg-inline-loader"
       }
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ["*", ".js", ".jsx"]
   },
   devServer: {
-    contentBase: './extension',
+    contentBase: "./extension",
     historyApiFallback: true
   }
 };
