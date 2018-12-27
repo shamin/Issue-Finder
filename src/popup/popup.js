@@ -4,13 +4,10 @@ import {
   Header,
   Body
 } from "../components/presentational/containers";
-import Card from "../components/presentational/card";
 import logo from "../assets/logo.svg";
 import refresh from "../assets/refresh.svg";
 import github from "../assets/github-blue.svg";
 import { ImageButton } from "../components/presentational/button";
-import { Query } from "react-apollo";
-import { ISSUES_QUERY } from "../constants";
 import Cards from "../components/container/cards";
 
 export default class PopUp extends React.Component {
@@ -27,16 +24,7 @@ export default class PopUp extends React.Component {
           />
         </Header>
         <Body>
-          <Query query={ISSUES_QUERY}>
-            {({ data }) => {
-              if (data.search === undefined) return null;
-              return (
-                <div>
-                  <Cards data={data.search.edges}/>
-                </div>
-              );
-            }}
-          </Query>
+          <Cards />
         </Body>
       </Container>
     );

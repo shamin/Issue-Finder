@@ -45,7 +45,6 @@ const CardStyles = styled.div`
 
 const Card = props => {
   const { issue } = props;
-  console.log(issue);
   return (
     <CardStyles>
       <div className="header">
