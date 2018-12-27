@@ -1,6 +1,8 @@
+import React from "react";
 import styled from "styled-components";
+import githubIcon from "../../assets/github-white.svg";
 
-const Card = styled.div`
+const CardStyles = styled.div`
   background: #4d5be7;
   color: #ffffff;
   border-radius: 10px;
@@ -18,7 +20,7 @@ const Card = styled.div`
       padding-left: 10px;
       font-weight: 500;
     }
-    .date{
+    .date {
       font-weight: 300;
       font-size: 14px;
     }
@@ -32,7 +34,29 @@ const Card = styled.div`
     font-weight: 300;
     opacity: 0.6;
     font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 32px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
   }
 `;
+
+const Card = props => {
+  const { issue } = props;
+  console.log(issue);
+  return (
+    <CardStyles>
+      <div className="header">
+        <img className="icon" src={githubIcon} />
+        <p className="repo">{issue.repository.nameWithOwner}</p>
+        {/* <p className="date">24-12-2018</p> */}
+      </div>
+      <p className="title">{issue.title}</p>
+      <p className="description">{issue.bodyText}</p>
+    </CardStyles>
+  );
+};
 
 export default Card;

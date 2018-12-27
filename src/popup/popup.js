@@ -8,7 +8,6 @@ import Card from "../components/presentational/card";
 import logo from "../assets/logo.svg";
 import refresh from "../assets/refresh.svg";
 import github from "../assets/github-blue.svg";
-import githubIcon from "../assets/github-white.svg";
 import { ImageButton } from "../components/presentational/button";
 import { Query } from "react-apollo";
 import { ISSUES_QUERY } from "../constants";
@@ -34,41 +33,10 @@ export default class PopUp extends React.Component {
               return (
                 <div>
                   <Cards data={data.search.edges}/>
-                  {/* {data.search.edges.map(e => (
-                    <Card>
-                      <div className="header">
-                        <img className="icon" src={githubIcon} />
-                        <p className="repo">nodejs/node</p>
-                        <p className="date">24-12-2018</p>
-                      </div>
-                      <p className="title">
-                        {e.node.title}
-                      </p>
-                      <p className="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua.
-                      </p>
-                    </Card>
-                  ))} */}
                 </div>
               );
             }}
           </Query>
-          {/* <Card>
-            <div className="header">
-              <img className="icon" src={githubIcon} />
-              <p className="repo">nodejs/node</p>
-              <p className="date">24-12-2018</p>
-            </div>
-            <p className="title">
-              Add `input` option to async child_process methods
-            </p>
-            <p className="description">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </Card> */}
         </Body>
       </Container>
     );

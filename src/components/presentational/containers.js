@@ -34,6 +34,6 @@ export const Header = styled.div`
 `;
 
 export const Body = styled.div`
-  height: 100%;
+  height: calc(500px - 73px);
   overflow: scroll;
 `;
