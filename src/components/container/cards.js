@@ -4,12 +4,19 @@ import { Query } from "react-apollo";
 import { ISSUES_QUERY } from "../../constants";
 import Spinner from "../presentational/spinner";
 
-const Cards = () => {
+const Cards = ({ labels, language }) => {
   return (
-    <Query query={ISSUES_QUERY}>
+    <Query
+      query={ISSUES_QUERY}
+      variables={{
+        query: `label: ${labels.join(
+          " label: "
+        )} state:open language: ${language}`
+      }}
+    >
       {({ data, loading, error }) => {
-        if(loading) return <Spinner />
-        if(error) return <p>Some Error Occured</p>
+        if (loading) return <Spinner />;
+        if (error) return <p>Some Error Occured</p>;
         return (
           <div>
             {data.search.edges.map(issue => (

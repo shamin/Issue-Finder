@@ -1,10 +1,10 @@
 import gql from "graphql-tag";
 
 export const ISSUES_QUERY = gql`
-{
+query searchIssues($query: String!) {
   search(
     first: 10
-    query: "label:help-wanted label:good-first-issue state:open language:JavaScript"
+    query: $query
     type: ISSUE
   ) {
     edges {

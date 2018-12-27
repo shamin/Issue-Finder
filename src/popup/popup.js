@@ -24,7 +24,7 @@ export default class PopUp extends React.Component {
           />
         </Header>
         <Body>
-          <Cards />
+          <Cards labels={["help-wanted", "good-first-issue"]} language="JavaScript"/>
         </Body>
       </Container>
     );
