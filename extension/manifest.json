@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "name": "Issue Finder",
+  "manifest_version": 2,
+  "description": "Chrome extension to find github issues",
+  "browser_action": {
+    "default_title": "Issue Finder",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html"
+}
