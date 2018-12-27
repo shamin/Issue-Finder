@@ -8,6 +8,10 @@ const CardStyles = styled.div`
   border-radius: 10px;
   margin: 15px 10px;
   padding: 20px;
+  a {
+    text-decoration: none;
+    color: #ffffff;
+  }
   .header {
     display: flex;
     align-items: center;
@@ -26,6 +30,7 @@ const CardStyles = styled.div`
     }
   }
   .title {
+    display: block;
     font-weight: 400;
     margin: 15px 0 8px 0;
     font-size: 15px;
@@ -49,10 +54,10 @@ const Card = props => {
     <CardStyles>
       <div className="header">
         <img className="icon" src={githubIcon} />
-        <p className="repo">{issue.repository.nameWithOwner}</p>
+        <a className="repo" href={issue.repository.url} target="_blank">{issue.repository.nameWithOwner}</a>
         {/* <p className="date">24-12-2018</p> */}
       </div>
-      <p className="title">{issue.title}</p>
+      <a className="title"  href={issue.url} target="_blank">{issue.title}</a>
       <p className="description">{issue.bodyText}</p>
     </CardStyles>
   );

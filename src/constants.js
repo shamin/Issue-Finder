@@ -23,6 +23,7 @@ export const ISSUES_QUERY = gql`
           url
           repository {
             nameWithOwner
+            url
           }
         }
       }
