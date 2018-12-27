@@ -57,9 +57,9 @@ export default class Options extends React.Component {
     return (
       <Form>
         <label className="label">Personal Access Token</label>
-        <Input type="text" onChange={this.handleLanguage} value={language} />
-        <label className="label">Language</label>
         <Input type="text" onChange={this.handleToken} value={accessToken} />
+        <label className="label">Language</label>
+        <Input type="text" onChange={this.handleLanguage} value={language} />
         <label className="label">Labels</label>
         <Select
           value={labelsSelected}

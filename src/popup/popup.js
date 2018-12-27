@@ -9,9 +9,35 @@ import refresh from "../assets/refresh.svg";
 import github from "../assets/github-blue.svg";
 import { ImageButton } from "../components/presentational/button";
 import Cards from "../components/container/cards";
+import { ApolloProvider } from "react-apollo";
+import ApolloClient from "apollo-boost";
+import { getDatas } from "../utils/functions";
 
 export default class PopUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accessToken: ""
+    };
+  }
+
+  componentDidMount() {
+    getDatas("accessToken", ({ accessToken }) => {
+      this.setState({ accessToken });
+    });
+  }
+
   render() {
+    const client = new ApolloClient({
+      uri: "https://api.github.com/graphql",
+      request: async operation => {
+        operation.setContext({
+          headers: {
+            Authorization: `token ${this.state.accessToken}`
+          }
+        });
+      }
+    });
     return (
       <Container>
         <Header>
@@ -24,7 +50,14 @@ export default class PopUp extends React.Component {
           />
         </Header>
         <Body>
-          <Cards labels={["help-wanted", "good-first-issue"]} language="JavaScript"/>
+          {this.state.accessToken.length > 0 && (
+            <ApolloProvider client={client}>
+              <Cards
+                labels={["help-wanted", "good-first-issue"]}
+                language="JavaScript"
+              />
+            </ApolloProvider>
+          )}
         </Body>
       </Container>
     );
