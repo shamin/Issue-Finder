@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
+import AddOptions from '../components/container/options'
 
 const Container = styled.div`
   width: 600px;
@@ -26,33 +27,6 @@ const Container = styled.div`
   }
 `;
 
-const Form = styled.div`
-  padding: 0 100px;
-  .label{
-    display: block;
-    color: #393770;
-    font-weight: 500;
-    margin: 40px 0 10px 0;
-  }
-`
-
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #4D5BE7;
-`
-
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #4D5BE7;
-  background: #4D5BE7;
-  color: #ffffff;
-  margin-left: 10px;
-  margin-top: 50px;
-  font-size: 16px;
-`
-
 
 export default class Options extends Component {
   render() {
@@ -62,15 +36,7 @@ export default class Options extends Component {
           <img className="logo-icon" src={logo} />
           <h1 className="name">Issue Finder</h1>
         </div>
-        <Form>
-          <label className="label">Personal Access Token</label>
-          <Input type="text"></Input> 
-          <label className="label">Language</label>
-          <Input type="text"></Input> 
-          <label className="label">Label</label>
-          <Input type="text"></Input> 
-          <Button>Save</Button>
-        </Form>
+        <AddOptions/>
       </Container>
     );
   }

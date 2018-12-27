@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "../presentational/card";
 import { Query } from "react-apollo";
-import { ISSUES_QUERY } from "../../constants";
+import { ISSUES_QUERY } from "../../utils/constants";
 import Spinner from "../presentational/spinner";
 
 const Cards = ({ labels, language }) => {

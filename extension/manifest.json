@@ -13,6 +13,7 @@
       "128": "icons/icon128.png"
     }
   },
+  "permissions": ["storage"],
   "options_page": "options.html",
   "content_security_policy": "default-src 'self' https://fonts.gstatic.com/*; script-src 'self' https://api.github.com/graphql https://api.github.com/graphql 'unsafe-eval'; connect-src https://api.github.com/graphql https://api.github.com/graphql; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }
