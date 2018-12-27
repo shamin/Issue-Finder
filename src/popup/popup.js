@@ -8,10 +8,10 @@ import logo from "../assets/logo.svg";
 import refresh from "../assets/refresh.svg";
 import github from "../assets/github-blue.svg";
 import { ImageButton } from "../components/presentational/button";
-import Cards from "../components/container/cards";
 import { ApolloProvider } from "react-apollo";
 import ApolloClient from "apollo-boost";
 import { getDatas } from "../utils/functions";
+import IssuesList from "../components/container/issueslist";
 
 export default class PopUp extends React.Component {
   constructor(props) {
@@ -52,10 +52,7 @@ export default class PopUp extends React.Component {
         <Body>
           {this.state.accessToken.length > 0 && (
             <ApolloProvider client={client}>
-              <Cards
-                labels={["help-wanted", "good-first-issue"]}
-                language="JavaScript"
-              />
+              <IssuesList />
             </ApolloProvider>
           )}
         </Body>
