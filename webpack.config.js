@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     'options': './src/options/options.js',
-    'popup': './src/popup/popup.js',
+    'popup': './src/popup/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'extension'),
@@ -14,6 +14,11 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader'
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.mjs$/,
+        use: []
       }
     ]
   },

@@ -7,5 +7,6 @@
     "default_title": "Issue Finder",
     "default_popup": "popup.html"
   },
-  "options_page": "options.html"
+  "options_page": "options.html",
+  "content_security_policy": "default-src 'self'; script-src 'self' https://api.github.com/graphql https://api.github.com/graphql 'unsafe-eval'; connect-src https://api.github.com/graphql https://api.github.com/graphql; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
 }

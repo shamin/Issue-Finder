@@ -1,20 +1,50 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import styled from 'styled-components'
+import React from "react";
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
+import { ACCESS_TOKEN } from '../config'
 
-const Button = styled.button`
-  background: palevioletred;
-  color: white;
+const client = new ApolloClient({
+  uri: "https://api.github.com/graphql",
+  request: async operation => {
+    operation.setContext({
+      headers: {
+        'Authorization': `token ${ACCESS_TOKEN}`
+      }
+    });
+  },
+});
 
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;
+client.query({
+  query: gql`
+    {
+      search(first: 10, query: "label:help-wanted label:good-first-issue state:open language:JavaScript", type: ISSUE) {
+        edges {
+          node {
+            ... on Issue {
+              title
+              bodyText
+              updatedAt
+              labels(first: 10) {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
+              url
+              repository {
+                nameWithOwner
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+}).then(result => console.log(result));
 
-
-ReactDOM.render(
-  <Button>Popup</Button>,
-  document.getElementById('popup')
-)
+export default class PopUp extends React.Component {
+  render() {
+    return <div>Popup Component</div>;
+  }
+}
