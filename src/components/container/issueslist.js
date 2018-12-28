@@ -22,6 +22,19 @@ export default class IssuesList extends React.Component {
 
   render() {
     const { labels, language } = this.state;
+    if (language.length === 0 || labels.length === 0)
+    return (
+      <div>
+        Add language and labels
+        <button
+          onClick={() => {
+            chrome.runtime.openOptionsPage();
+          }}
+        >
+          options
+        </button>
+      </div>
+    );
     return <Cards labels={labels} language={language} />;
   }
 }
