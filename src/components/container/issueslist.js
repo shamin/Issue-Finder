@@ -33,7 +33,7 @@ export default class IssuesList extends React.Component {
               chrome.runtime.openOptionsPage();
             }}
           >
-            options
+            Options
           </button>
         </Status>
       );

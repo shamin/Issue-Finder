@@ -63,8 +63,8 @@ export default class PopUp extends React.Component {
             </ApolloProvider>
           ) : (
             <Status>
-              <p className="status-text">Add accessToken in options</p>
-              <button className="status-button" onClick={this.openOptions}>options</button>
+              <p className="status-text">Add Access Token in options</p>
+              <button className="status-button" onClick={this.openOptions}>Options</button>
             </Status>
           )}
         </Body>
