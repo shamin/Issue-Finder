@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const ISSUES_QUERY = gql`
-  query searchIssues($query: String!) {
-    search(first: 10, query: $query, type: ISSUE) {
+  query searchIssues($query: String!, $end: String) {
+    search(first: 10, query: $query, type: ISSUE, after: $end) {
       edges {
         node {
           ... on Issue {
@@ -23,6 +23,10 @@ export const ISSUES_QUERY = gql`
             }
           }
         }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
       }
     }
   }
