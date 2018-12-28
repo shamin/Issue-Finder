@@ -6,7 +6,7 @@ import {
   Status
 } from "../components/presentational/containers";
 import logo from "../assets/logo.svg";
-import refresh from "../assets/refresh.svg";
+import options from "../assets/options.svg";
 import github from "../assets/github-blue.svg";
 import { ImageButton } from "../components/presentational/button";
 import { ApolloProvider } from "react-apollo";
@@ -20,12 +20,18 @@ export default class PopUp extends React.Component {
     this.state = {
       accessToken: ""
     };
+    this.openOptions = this.openOptions.bind(this);
   }
 
   componentDidMount() {
     getDatas("accessToken", ({ accessToken }) => {
       if (accessToken !== undefined) this.setState({ accessToken });
     });
+  }
+
+  openOptions(e){
+    e.preventDefault()
+    chrome.runtime.openOptionsPage()
   }
 
   render() {
@@ -44,7 +50,7 @@ export default class PopUp extends React.Component {
         <Header>
           <img className="logo" src={logo} />
           <h1 className="name">Issue Finder</h1>
-          <ImageButton src={refresh} />
+          <ImageButton src={options} onClick={this.openOptions}/>
           <ImageButton
             src={github}
             href="https://github.com/shaminmeerankutty/Issue-Finder"
@@ -58,7 +64,7 @@ export default class PopUp extends React.Component {
           ) : (
             <Status>
               <p className="status-text">Add accessToken in options</p>
-              <button className="status-button" onClick={()=>{chrome.runtime.openOptionsPage()}}>options</button>
+              <button className="status-button" onClick={this.openOptions}>options</button>
             </Status>
           )}
         </Body>
