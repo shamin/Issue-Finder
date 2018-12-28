@@ -12,6 +12,7 @@ const Container = styled.div`
   border-left: 1px solid #EFF0F4;
   border-right: 1px solid #EFF0F4;
   font-family: "Roboto", sans-serif;
+  font-size: 16px;
   .logo{
     padding: 50px 0;
     text-align: center;
@@ -23,6 +24,17 @@ const Container = styled.div`
       margin: 0;
       text-transform: uppercase;
       color: #393770;
+    }
+  }
+  .small-text{
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .link {
+    text-decoration: none;
+    color: #4d5be7;
+    &:visited{
+      color: #4d5be7;
     }
   }
 `;

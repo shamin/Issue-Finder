@@ -26,7 +26,9 @@ export default class Options extends React.Component {
       this.setState({ accessToken });
     });
     getDatas("labels", ({ labels }) => {
-      this.setState({ labelsSelected: labels.map(d => ({ value: d, label: d })) });
+      this.setState({
+        labelsSelected: labels.map(d => ({ value: d, label: d }))
+      });
     });
   }
 
@@ -56,7 +58,14 @@ export default class Options extends React.Component {
     const options = labels.map(d => ({ value: d, label: d }));
     return (
       <Form>
-        <label className="label">Personal Access Token</label>
+        <label className="label">
+          Personal Access Token
+          <br />
+          <span className="small-text">
+            Get Personal Access Token from{" "}
+            <a className="link" href="https://github.com/settings/tokens" target="__blank">https://github.com/settings/tokens</a>
+          </span>
+        </label>
         <Input type="text" onChange={this.handleToken} value={accessToken} />
         <label className="label">Language</label>
         <Input type="text" onChange={this.handleLanguage} value={language} />
