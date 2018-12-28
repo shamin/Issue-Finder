@@ -29,7 +29,6 @@ export const ISSUES_QUERY = gql`
 `;
 
 export const labels = [
-  "help-wanted",
   "up-for-grabs",
   "bug",
   "documentation",
