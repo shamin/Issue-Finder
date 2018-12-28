@@ -3,6 +3,7 @@ import { Input, Form, Button } from "../presentational/forms";
 import Select from "react-select";
 import { labels } from "../../utils/constants";
 import { saveData, getDatas } from "../../utils/functions";
+import { Status } from "../presentational/containers";
 
 export default class Options extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ export default class Options extends React.Component {
     this.state = {
       labelsSelected: [],
       accessToken: "",
-      language: ""
+      language: "",
+      loading: false
     };
     this.handleLabels = this.handleLabels.bind(this);
     this.handleToken = this.handleToken.bind(this);
@@ -45,16 +47,24 @@ export default class Options extends React.Component {
   }
 
   onSave(e) {
+    this.setState({ loading: true });
     e.preventDefault();
     const { labelsSelected, accessToken, language } = this.state;
     saveData("language", language);
     saveData("accessToken", accessToken);
     const labels = labelsSelected.map(label => label.value);
     saveData("labels", labels);
+    this.setState({ loading: false, showStatus: true });
   }
 
   render() {
-    const { labelsSelected, accessToken, language } = this.state;
+    const {
+      labelsSelected,
+      accessToken,
+      language,
+      loading,
+      showStatus
+    } = this.state;
     const options = labels.map(d => ({ value: d, label: d }));
     return (
       <Form>
@@ -63,7 +73,13 @@ export default class Options extends React.Component {
           <br />
           <span className="small-text">
             Get Personal Access Token from{" "}
-            <a className="link" href="https://github.com/settings/tokens" target="__blank">https://github.com/settings/tokens</a>
+            <a
+              className="link"
+              href="https://github.com/settings/tokens"
+              target="__blank"
+            >
+              https://github.com/settings/tokens
+            </a>
           </span>
         </label>
         <Input type="text" onChange={this.handleToken} value={accessToken} />
@@ -78,6 +94,8 @@ export default class Options extends React.Component {
           classNamePrefix="react-select"
           onChange={this.handleLabels}
         />
+        {loading && <Spinner />}
+        {showStatus && <Status>Saved Successfully</Status>}
         <Button onClick={this.onSave}>Save</Button>
       </Form>
     );
