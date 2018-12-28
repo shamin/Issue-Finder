@@ -23,7 +23,7 @@ export default class PopUp extends React.Component {
 
   componentDidMount() {
     getDatas("accessToken", ({ accessToken }) => {
-      this.setState({ accessToken });
+      if (accessToken !== undefined) this.setState({ accessToken });
     });
   }
 
@@ -50,10 +50,14 @@ export default class PopUp extends React.Component {
           />
         </Header>
         <Body>
-          {this.state.accessToken.length > 0 && (
+          {this.state.accessToken.length > 0 ? (
             <ApolloProvider client={client}>
               <IssuesList />
             </ApolloProvider>
+          ) : (
+            <div>Add accessToken in options
+              <button onClick={()=>{chrome.runtime.openOptionsPage()}}>options</button>
+            </div>
           )}
         </Body>
       </Container>
