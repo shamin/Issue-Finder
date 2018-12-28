@@ -1,6 +1,7 @@
 import React from "react";
 import Cards from "../container/cards";
 import { getDatas } from "../../utils/functions";
+import { Status } from "../presentational/containers";
 
 export default class IssuesList extends React.Component {
   constructor(props) {
@@ -23,18 +24,19 @@ export default class IssuesList extends React.Component {
   render() {
     const { labels, language } = this.state;
     if (language.length === 0 || labels.length === 0)
-    return (
-      <div>
-        Add language and labels
-        <button
-          onClick={() => {
-            chrome.runtime.openOptionsPage();
-          }}
-        >
-          options
-        </button>
-      </div>
-    );
+      return (
+        <Status>
+          <p>Add Language and Labels.</p>
+          <button
+            className="status-button"
+            onClick={() => {
+              chrome.runtime.openOptionsPage();
+            }}
+          >
+            options
+          </button>
+        </Status>
+      );
     return <Cards labels={labels} language={language} />;
   }
 }

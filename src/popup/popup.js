@@ -2,7 +2,8 @@ import React from "react";
 import {
   Container,
   Header,
-  Body
+  Body,
+  Status
 } from "../components/presentational/containers";
 import logo from "../assets/logo.svg";
 import refresh from "../assets/refresh.svg";
@@ -55,9 +56,10 @@ export default class PopUp extends React.Component {
               <IssuesList />
             </ApolloProvider>
           ) : (
-            <div>Add accessToken in options
-              <button onClick={()=>{chrome.runtime.openOptionsPage()}}>options</button>
-            </div>
+            <Status>
+              <p className="status-text">Add accessToken in options</p>
+              <button className="status-button" onClick={()=>{chrome.runtime.openOptionsPage()}}>options</button>
+            </Status>
           )}
         </Body>
       </Container>

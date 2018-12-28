@@ -37,3 +37,19 @@ export const Body = styled.div`
   height: calc(500px - 73px);
   overflow: scroll;
 `;
+
+export const Status = styled.div`
+  font-size: 14px;
+  margin-top: 20px;
+  color: #393770;
+  text-align: center;
+  .status-button {
+    margin-top: 10px;
+    background: #4d5be7;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    padding: 5px 12px;
+    border-radius: 5px;
+  }
+`;
