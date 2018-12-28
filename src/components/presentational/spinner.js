@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { keyframes } from "styled-components";
 
 const spin = keyframes`
@@ -17,12 +18,24 @@ const Spinner = styled.div`
   border: 2px solid #4d5be7;
   border-left: 0;
   border-bottom: 0;
+  margin: 0 auto;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 10px auto;
   animation: ${spin} 1s linear infinite;
   transform-origin: 0% 100%;
 `;
 
-export default Spinner;
+const SpinnerHolder = styled.div`
+  width: 50px;
+  height: 50px;
+  margin: 10px auto;
+`;
+
+const Loading = () => (
+  <SpinnerHolder>
+    <Spinner />
+  </SpinnerHolder>
+);
+
+export default Loading;
