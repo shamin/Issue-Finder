@@ -5,7 +5,7 @@
 ## Screenshots
 
 <div align="center">
-  <img width="300" src="images/issuefinder.gif" />
-  <img width="300" src="images/screenshot-1.jpg" />
-  <img width="300" src="images/screenshot-2.jpg" />
+  <img width="250" src="images/issuefinder.gif" />
+  <img width="250" src="images/screenshot-1.jpg" />
+  <img width="250" src="images/screenshot-2.jpg" />
 </div>
