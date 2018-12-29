@@ -4,4 +4,8 @@
 
 ## Screenshots
 
-<div align="center"><img src="images/issuefinder.gif" /></div>
+<div align="center">
+  <img width="300" src="images/issuefinder.gif" />
+  <img width="300" src="images/screenshot-1.jpg" />
+  <img width="300" src="images/screenshot-2.jpg" />
+</div>
