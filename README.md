@@ -9,3 +9,9 @@
   <img width="250" src="images/screenshot-1.jpg" />
   <img width="250" src="images/screenshot-2.jpg" />
 </div>
+
+## How to use
+- Install plugin from chrome web store or download the zip file.
+- Login with your github account.
+- Add desired language and labels in the options page.
+
