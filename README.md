@@ -15,3 +15,5 @@
 - Login with your github account.
 - Add desired language and labels in the options page.
 
+## Licence
+Code released under the [MIT License](LICENSE.md).
