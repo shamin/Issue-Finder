@@ -14,6 +14,11 @@ import ApolloClient from "apollo-boost";
 import { getDatas } from "../utils/functions";
 import IssuesList from "../components/container/issueslist";
 
+
+import { clientId } from "../config";
+import { handleProviderResponse, parseRedirectFragment} from "../utils/auth"
+
+
 export default class PopUp extends React.Component {
   constructor(props) {
     super(props);
@@ -29,9 +34,46 @@ export default class PopUp extends React.Component {
     });
   }
 
-  openOptions(e){
-    e.preventDefault()
-    chrome.runtime.openOptionsPage()
+  openOptions(e) {
+    e.preventDefault();
+    chrome.runtime.openOptionsPage();
+  }
+
+  login() {
+    console.log("Login --------");
+
+    console.log(chrome.identity.getRedirectURL("issue-finder"));
+
+    const redirectUri = chrome.identity.getRedirectURL("issue-finder");
+    const redirectRe = new RegExp(redirectUri + "[#?](.*)");
+
+    const options = {
+      interactive: true,
+      url:
+        "https://github.com/login/oauth/authorize" +
+        "?client_id=" +
+        clientId +
+        "&redirect_uri=" +
+        encodeURIComponent(redirectUri)
+    };
+    
+    chrome.identity.launchWebAuthFlow(options, function(redirectUri) {
+      console.log(
+        "launchWebAuthFlow completed",
+        chrome.runtime.lastError,
+        redirectUri
+      );
+      if (chrome.runtime.lastError) {
+        callback(new Error(chrome.runtime.lastError));
+        return;
+      }
+      const matches = redirectUri.match(redirectRe);
+      if (matches && matches.length > 1)
+        handleProviderResponse(parseRedirectFragment(matches[1]));
+      else callback(new Error("Invalid redirect URI"));
+    });    
+
+    console.log("Login --------");
   }
 
   render() {
@@ -50,7 +92,7 @@ export default class PopUp extends React.Component {
         <Header>
           <img className="logo" src={logo} />
           <h1 className="name">Issue Finder</h1>
-          <ImageButton src={options} onClick={this.openOptions}/>
+          <ImageButton src={options} onClick={this.openOptions} />
           <ImageButton
             src={github}
             href="https://github.com/shaminmeerankutty/Issue-Finder"
@@ -63,8 +105,10 @@ export default class PopUp extends React.Component {
             </ApolloProvider>
           ) : (
             <Status>
-              <p className="status-text">Add Access Token in options</p>
-              <button className="status-button" onClick={this.openOptions}>Options</button>
+              <p className="status-text">Sign in with github</p>
+              <button className="status-button" onClick={this.login}>
+                Login
+              </button>
             </Status>
           )}
         </Body>
