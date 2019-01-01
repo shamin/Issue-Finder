@@ -13,10 +13,6 @@
       "128": "icons/icon128.png"
     }
   },
-  "background": {
-    "scripts": ["main.js"],
-    "persistent": false
-  },
   "permissions": ["storage", "identity", "https://github.com/"],
   "options_page": "options.html",
   "content_security_policy": "default-src 'self' https://fonts.gstatic.com/; script-src 'self' https://api.github.com/graphql https://api.github.com/graphql 'unsafe-eval'; connect-src *; style-src * 'unsafe-inline' 'self' https://fonts.googleapis.com blob:; img-src 'self' data:;font-src 'self' https://fonts.gstatic.com data:;"
