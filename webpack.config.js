@@ -4,7 +4,6 @@ module.exports = {
   entry: {
     options: "./src/options/index.js",
     popup: "./src/popup/index.js",
-    main: "./src/background/index.js",
   },
   output: {
     path: path.resolve(__dirname, "extension"),
