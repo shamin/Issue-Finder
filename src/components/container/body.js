@@ -4,25 +4,53 @@ import ApolloClient from "apollo-boost";
 
 import IssuesList from "./issueslist";
 import { Body, Status } from "../presentational/containers";
-import { getDatas } from "../utils/functions";
-import { clientId } from "../config";
-import { handleProviderResponse, parseRedirectFragment } from "../utils/auth";
+import { getDatas, saveData } from "../../utils/functions";
+import { clientId } from "../../config";
+import {
+  handleProviderResponse,
+  parseRedirectFragment
+} from "../../utils/auth";
 
 export default class BodyComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      accessToken: ""
+      accessToken: "",
+      loading: true
     };
+    this.client = null;
+    this.login = this.login.bind(this);
+    this.authCallback = this.authCallback.bind(this);
+    this.setTokenAndClient = this.setTokenAndClient.bind(this);
   }
 
   componentDidMount() {
     getDatas("accessToken", ({ accessToken }) => {
-      if (accessToken !== undefined) this.setState({ accessToken });
+      if (accessToken !== undefined) {
+        this.setTokenAndClient(accessToken);
+      } else {
+        this.setState({ loading: false });
+      }
     });
   }
 
+  setTokenAndClient(accessToken) {
+    this.client = new ApolloClient({
+      uri: "https://api.github.com/graphql",
+      request: async operation => {
+        operation.setContext({
+          headers: {
+            Authorization: `token ${accessToken}`
+          }
+        });
+      }
+    });
+    this.setState({ accessToken, loading: false });
+    console.log(this.client);
+  }
+
   login() {
+    this.setState({ loading: true });
     const redirectUri = chrome.identity.getRedirectURL("issue-finder");
     const redirectRe = new RegExp(redirectUri + "[#?](.*)");
 
@@ -36,38 +64,39 @@ export default class BodyComponent extends React.Component {
         encodeURIComponent(redirectUri)
     };
 
-    chrome.identity.launchWebAuthFlow(options, function(redirectUri) {
-      console.log(
-        "launchWebAuthFlow completed",
-        chrome.runtime.lastError,
-        redirectUri
-      );
+    chrome.identity.launchWebAuthFlow(options, redirectUri => {
       if (chrome.runtime.lastError) {
-        callback(new Error(chrome.runtime.lastError));
+        this.authCallback(new Error(chrome.runtime.lastError));
         return;
       }
       const matches = redirectUri.match(redirectRe);
-      if (matches && matches.length > 1)
-        handleProviderResponse(parseRedirectFragment(matches[1]));
-      else callback(new Error("Invalid redirect URI"));
+      if (matches && matches.length > 1) {
+        handleProviderResponse(
+          parseRedirectFragment(matches[1]),
+          this.authCallback
+        );
+      } else this.authCallback(new Error("Invalid redirect URI"));
     });
   }
 
+  authCallback(error, accessToken) {
+    if (error) {
+      console.error("Error logging in", error);
+    } else {
+      this.setTokenAndClient(accessToken);
+      saveData("accessToken", accessToken);
+    }
+  }
+
   render() {
-    const client = new ApolloClient({
-      uri: "https://api.github.com/graphql",
-      request: async operation => {
-        operation.setContext({
-          headers: {
-            Authorization: `token ${this.state.accessToken}`
-          }
-        });
-      }
-    });
+    const { loading, accessToken } = this.state;
+    console.log(accessToken.length, this.client);
     return (
-      <Body>
-        {this.state.accessToken.length > 0 ? (
-          <ApolloProvider client={client}>
+      <Body loading={loading}>
+        {this.client !== null &&
+        accessToken !== undefined &&
+        accessToken.length > 0 ? (
+          <ApolloProvider client={this.client}>
             <IssuesList />
           </ApolloProvider>
         ) : (
