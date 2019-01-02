@@ -1,4 +1,6 @@
+import React from 'react'
 import styled from "styled-components";
+import Spinner from "./spinner";
 
 export const Container = styled.div`
   position: relative;
@@ -33,7 +35,7 @@ export const Header = styled.div`
   }
 `;
 
-export const Body = styled.div`
+const BodyStyles = styled.div`
   height: calc(500px - 73px);
   overflow: scroll;
 `;
@@ -53,3 +55,7 @@ export const Status = styled.div`
     border-radius: 5px;
   }
 `;
+
+export const Body = props => (
+  <BodyStyles>{props.loading ? <Spinner /> : props.children}</BodyStyles>
+);
