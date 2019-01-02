@@ -60,7 +60,6 @@ const Cards = ({ labels, language }) => {
   const query = `label:${labels.join(
     " label:"
   )} state:open language:${language}`;
-  console.log(query);
   return <IssuesListWithQuery query={query} />;
 };
 

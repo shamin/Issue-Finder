@@ -46,7 +46,6 @@ export default class BodyComponent extends React.Component {
       }
     });
     this.setState({ accessToken, loading: false });
-    console.log(this.client);
   }
 
   login() {
@@ -90,7 +89,6 @@ export default class BodyComponent extends React.Component {
 
   render() {
     const { loading, accessToken } = this.state;
-    console.log(accessToken.length, this.client);
     return (
       <Body loading={loading}>
         {this.client !== null &&
