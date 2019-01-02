@@ -10,12 +10,10 @@ export default class Options extends React.Component {
     super(props);
     this.state = {
       labelsSelected: [],
-      accessToken: "",
       language: "",
       loading: false
     };
     this.handleLabels = this.handleLabels.bind(this);
-    this.handleToken = this.handleToken.bind(this);
     this.handleLanguage = this.handleLanguage.bind(this);
     this.onSave = this.onSave.bind(this);
   }
@@ -24,18 +22,11 @@ export default class Options extends React.Component {
     getDatas("language", ({ language }) => {
       this.setState({ language });
     });
-    getDatas("accessToken", ({ accessToken }) => {
-      this.setState({ accessToken });
-    });
     getDatas("labels", ({ labels }) => {
       this.setState({
         labelsSelected: labels.map(d => ({ value: d, label: d }))
       });
     });
-  }
-
-  handleToken(e) {
-    this.setState({ accessToken: e.target.value });
   }
 
   handleLanguage(e) {
@@ -49,40 +40,18 @@ export default class Options extends React.Component {
   onSave(e) {
     this.setState({ loading: true });
     e.preventDefault();
-    const { labelsSelected, accessToken, language } = this.state;
+    const { labelsSelected, language } = this.state;
     saveData("language", language);
-    saveData("accessToken", accessToken);
     const labels = labelsSelected.map(label => label.value);
     saveData("labels", labels);
     this.setState({ loading: false, showStatus: true });
   }
 
   render() {
-    const {
-      labelsSelected,
-      accessToken,
-      language,
-      loading,
-      showStatus
-    } = this.state;
+    const { labelsSelected, language, loading, showStatus } = this.state;
     const options = labels.map(d => ({ value: d, label: d }));
     return (
       <Form>
-        <label className="label">
-          Personal Access Token
-          <br />
-          <span className="small-text">
-            Get Personal Access Token from{" "}
-            <a
-              className="link"
-              href="https://github.com/settings/tokens"
-              target="__blank"
-            >
-              https://github.com/settings/tokens
-            </a>
-          </span>
-        </label>
-        <Input type="text" onChange={this.handleToken} value={accessToken} />
         <label className="label">Language</label>
         <Input type="text" onChange={this.handleLanguage} value={language} />
         <label className="label">Labels</label>
