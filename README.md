@@ -15,5 +15,8 @@
 - Login with your github account.
 - Add desired language and labels in the options page.
 
+## How to contribute
+Contributing guidelines available [here ](CONTRIBUTING.md).
+
 ## Licence
 Code released under the [MIT License](LICENSE.md).
